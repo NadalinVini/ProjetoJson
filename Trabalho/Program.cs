@@ -21,18 +21,12 @@ namespace Trabalho
             var modelo = JsonConvert.DeserializeObject<List<Modelo.Modelo>>(json);
 
             foreach (var obj in modelo.ToList())
-            {               
-                var Lati = Convert.ToDecimal(obj.latitude);
-                var Long = Convert.ToDecimal(obj.longitude);
-
-                br.AdicionarRegiao(Lati, Long, obj.bairro, obj.cidade, obj.uf);
-
-                var x = 123;
-                  //Tratando de dados do Tipo Faixa 
+            {              
+                //Tratando de dados do Tipo Faixa 
 
                 #region Faixa Area Total
-                  //Verificando a faixa da area total do imovel
-                  var areat = Convert.ToDecimal(obj.area_total);
+                //Verificando a faixa da area total do imovel
+                var areat = Convert.ToDecimal(obj.area_total);
                 var areatot = string.Empty;
 
                 if (!String.IsNullOrEmpty(obj.area_total))
@@ -216,23 +210,29 @@ namespace Trabalho
                 //Verificando a faixa do valor de venda do imovel
                 var valor = Convert.ToDecimal(obj.valor_venda);
                 var venda = string.Empty;
+                var padrao = string.Empty;
 
                 if (!String.IsNullOrEmpty(obj.valor_venda))
                     if (valor > 0 && valor <= 50000)
                 {
                     venda = "Entre 0 - 50.000 valores";
+                        padrao = "Básico";
                 }
                 else if (valor > 50000 && valor <= 125000)
                 {
                     venda = "Entre 50.001" +
                         " - 125.000 valores";
+                        padrao = "Médio";
                 }
                 else if (valor > 125000 && valor <= 200000)
                 {
                     venda = "Entre 125.001 - 200.000 valores";
+                        padrao = "Classe A";
                 }
+
                 else
                     venda = "Acima de 200.001 valores";
+                padrao = "Alta Classe";
                 #endregion
 
                 #region Faixa Valor Aluguel
@@ -261,7 +261,38 @@ namespace Trabalho
 
 
 
-                #region Métodos de Validação
+                #region Métodos de Validação --Snow Flake
+
+                //Validando se Estado ja existe
+
+                var uf = br.BuscarEstado(obj.uf);
+                var ufest = obj.uf;
+
+                if(uf == 0)
+                {
+                    br.AdicionaEstado(ufest);
+                }
+
+                //Validando se Cidade ja existe
+
+                var cid = br.BuscaCidade(obj.cidade);
+                var cida = obj.cidade;
+
+                if(cid == 0)
+                {
+                    br.AdicionaCidade(obj.cidade, obj.uf);
+                }
+
+                //Validando se Bairro ja existe
+
+                var bai = br.BuscarBairro(obj.bairro);
+                var bair = obj.bairro;
+                var cep = Convert.ToInt32(obj.cep.Substring(0, 5));
+
+                if(bai == 0)
+                {
+                    br.AdicionaBairro(obj.cidade, bair, cep);
+                }
 
                 #endregion
 
@@ -270,7 +301,7 @@ namespace Trabalho
 
                 #region Adicionando Imovel
                 //Metodo para inserir Imovel no Banco
-                banco.AdicionarImovel(obj.categoria != null ? obj.categoria : null,
+              var idImovel = banco.AdicionarImovel(obj.categoria != null ? obj.categoria : null,
                                        obj.status != null ? obj.status : null,
                                        areatot == "" ? null : areatot,
                                        areapri == "" ? null : areapri,
@@ -292,9 +323,13 @@ namespace Trabalho
                                        );
                 #endregion
 
-                #region Adicionando Regiao
-                
+                #region Tempo
+                var ano = banco.RandomNumber();
+                #endregion
 
+                #region Fato
+
+                banco.AdicionarFato(obj.bairro, ano, idImovel, padrao);
 
                 #endregion
 

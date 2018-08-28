@@ -25,12 +25,11 @@ namespace Trabalho
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Bairro> Bairro { get; set; }
-        public virtual DbSet<Cidade> Cidade { get; set; }
-        public virtual DbSet<Estado> Estado { get; set; }
-        public virtual DbSet<FATO> FATO { get; set; }
-        public virtual DbSet<Imovel> Imovel { get; set; }
-        public virtual DbSet<Regiao> Regiao { get; set; }
-        public virtual DbSet<Tempo> Tempo { get; set; }
+        public virtual DbSet<TAB_Bairro> TAB_Bairro { get; set; }
+        public virtual DbSet<TAB_Cidade> TAB_Cidade { get; set; }
+        public virtual DbSet<TAB_Estado> TAB_Estado { get; set; }
+        public virtual DbSet<TAB_Fato> TAB_Fato { get; set; }
+        public virtual DbSet<TAB_Imovel> TAB_Imovel { get; set; }
+        public virtual DbSet<TAB_Tempo> TAB_Tempo { get; set; }
     }
 }

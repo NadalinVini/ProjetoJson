@@ -9,7 +9,8 @@ namespace Trabalho.Repositorio
 {
     public class Banco
     {
-        public void AdicionarImovel(string cat,
+        //Adiciona Imovel
+        public int AdicionarImovel(string cat,
                                      string status,
                                      string faixa_area,
                                      string faixa_area_privada,
@@ -30,7 +31,7 @@ namespace Trabalho.Repositorio
                                      bool mostra_mapa
                                      )
         {
-            Imovel imovel = new Imovel();
+            TAB_Imovel imovel = new TAB_Imovel();
             imovel.Categoria = cat;
             imovel.Status_ = status;
             imovel.Faixa_Area = faixa_area;
@@ -52,10 +53,50 @@ namespace Trabalho.Repositorio
             imovel.Faixa_Preco_IPTU = faixa_iptu;
 
             TrabalhoEFEntities ef = new TrabalhoEFEntities();
-            ef.Imovel.Add(imovel);
+            ef.TAB_Imovel.Add(imovel);
 
             ef.SaveChanges();
             
+                int qtd = Convert.ToInt32((from p in ef.TAB_Imovel select p.Idf_Imovel).Max());
+
+                return qtd;
+            }
+        
+        //Adiciona Tempo
+        public int RandomNumber()
+        {
+            Random random = new Random();
+            var ano = random.Next(1900, 2019);
+
+            TrabalhoEFEntities ef = new TrabalhoEFEntities();
+
+            TAB_Tempo tempo = new TAB_Tempo();
+            tempo.Ano_Construcao = ano;
+            ef.TAB_Tempo.Add(tempo);
+
+            ef.SaveChanges();
+
+            int qtd = Convert.ToInt32((from p in ef.TAB_Tempo select p.Idf_Tempo).Max());
+
+            return qtd;
+            
+        }
+
+        public void AdicionarFato(string des_bairro, int tempo, int imovel, string padrao)
+        {
+            TrabalhoEFEntities ef = new TrabalhoEFEntities();
+
+            TAB_Fato fato = new TAB_Fato();
+            Banco_Regiao br = new Banco_Regiao();
+
+            fato.Idf_Tempo = tempo;
+            fato.Idf_Imovel = imovel;
+            fato.Idf_Bairro = br.BuscarBairroporId(des_bairro);
+            fato.Padrao = padrao;
+
+            ef.TAB_Fato.Add(fato);
+
+            ef.SaveChanges();
         }
     }
 }

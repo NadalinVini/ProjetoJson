@@ -55,37 +55,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bairro.cs">
-      <DependentUpon>TrabalhoEF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Cidade.cs">
-      <DependentUpon>TrabalhoEF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Estado.cs">
-      <DependentUpon>TrabalhoEF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="FATO.cs">
-      <DependentUpon>TrabalhoEF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imovel.cs">
-      <DependentUpon>TrabalhoEF.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Regiao.cs">
-      <DependentUpon>TrabalhoEF.tt</DependentUpon>
-    </Compile>
     <Compile Include="Repositorio\Banco.cs" />
-    <Compile Include="Modelo\Bairro.cs" />
-    <Compile Include="Modelo\Cidade.cs" />
-    <Compile Include="Modelo\Estado.cs" />
-    <Compile Include="Modelo\FATO.cs" />
-    <Compile Include="Modelo\Imovel.cs" />
     <Compile Include="Modelo\Modelo.cs" />
-    <Compile Include="Modelo\Regiao.cs" />
-    <Compile Include="Modelo\Tempo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorio\Banco_Regiao.cs" />
-    <Compile Include="Tempo.cs">
+    <Compile Include="TAB_Bairro.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAB_Cidade.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAB_Estado.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAB_Fato.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAB_Imovel.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TAB_Tempo.cs">
       <DependentUpon>TrabalhoEF.tt</DependentUpon>
     </Compile>
     <Compile Include="TrabalhoEF.Context.cs">
