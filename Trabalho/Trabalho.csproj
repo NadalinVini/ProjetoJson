@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{84D18B15-391E-4F04-8098-E9290E84453B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Trabalho</RootNamespace>
+    <AssemblyName>Trabalho</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bairro.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cidade.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Estado.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FATO.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Imovel.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Regiao.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\Banco.cs" />
+    <Compile Include="Modelo\Bairro.cs" />
+    <Compile Include="Modelo\Cidade.cs" />
+    <Compile Include="Modelo\Estado.cs" />
+    <Compile Include="Modelo\FATO.cs" />
+    <Compile Include="Modelo\Imovel.cs" />
+    <Compile Include="Modelo\Modelo.cs" />
+    <Compile Include="Modelo\Regiao.cs" />
+    <Compile Include="Modelo\Tempo.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorio\Banco_Regiao.cs" />
+    <Compile Include="Tempo.cs">
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrabalhoEF.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrabalhoEF.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrabalhoEF.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrabalhoEF.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrabalhoEF.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrabalhoEF.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="imobiliaria.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <EntityDeploy Include="TrabalhoEF.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TrabalhoEF.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TrabalhoEF.edmx.diagram">
+      <DependentUpon>TrabalhoEF.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TrabalhoEF.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TrabalhoEF.edmx</DependentUpon>
+      <LastGenOutput>TrabalhoEF.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TrabalhoEF.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TrabalhoEF.edmx</DependentUpon>
+      <LastGenOutput>TrabalhoEF.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

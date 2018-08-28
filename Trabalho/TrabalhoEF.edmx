@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TrabalhoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bairro">
+          <Key>
+            <PropertyRef Name="Idf_Bairro" />
+          </Key>
+          <Property Name="Idf_Bairro" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Idf_Cidade" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Des_Bairro" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="Idf_Cidade" />
+          </Key>
+          <Property Name="Idf_Cidade" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Idf_Estado" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Des_Cidade" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Idf_Estado" />
+          </Key>
+          <Property Name="Idf_Estado" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Des_Estado" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="FATO">
+          <Key>
+            <PropertyRef Name="Idf_Fato" />
+          </Key>
+          <Property Name="Idf_Fato" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Idf_Regiao" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Idf_Tempo" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Idf_Imovel" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Imovel">
+          <Key>
+            <PropertyRef Name="Idf_Imovel" />
+          </Key>
+          <Property Name="Idf_Imovel" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categoria" Type="varchar" MaxLength="100" />
+          <Property Name="Status_" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Area" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Area_Privada" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Preco_IPTU" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Area_Condominio" Type="varchar" MaxLength="100" />
+          <Property Name="Flg_Planta" Type="bit" />
+          <Property Name="Flg_Dependencia" Type="bit" />
+          <Property Name="Flg_Sacada" Type="bit" />
+          <Property Name="Flg_Portaria" Type="bit" />
+          <Property Name="Flg_Elevador" Type="bit" />
+          <Property Name="Churrasqueira" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Dormintorios" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Suites" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Vagas" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Banheiros" Type="varchar" MaxLength="100" />
+          <Property Name="Faixa_Valor_Venda" Type="varchar" MaxLength="100" />
+          <Property Name="Flg_Mostra_mapa" Type="bit" />
+          <Property Name="Faixa_Valor_Aluguel" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Regiao">
+          <Key>
+            <PropertyRef Name="Idf_Regiao" />
+          </Key>
+          <Property Name="Idf_Regiao" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Idf_Bairro" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CEP" Type="numeric" Precision="11" Scale="0" />
+          <Property Name="Endereco" Type="varchar" MaxLength="100" />
+          <Property Name="Complemento" Type="varchar" MaxLength="100" />
+          <Property Name="Latitude" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="Longitude" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="Numero" Type="numeric" Precision="10" Scale="0" />
+        </EntityType>
+        <EntityType Name="Tempo">
+          <Key>
+            <PropertyRef Name="Idf_Tempo" />
+          </Key>
+          <Property Name="Idf_Tempo" Type="numeric" Precision="10" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Analise_Mensal" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="Clima" Type="varchar" MaxLength="100" />
+          <Property Name="Semana_Mes" Type="numeric" Precision="1" Scale="0" />
+          <Property Name="Flg_Feriado" Type="bit" />
+          <Property Name="Flg_Final_Semana" Type="bit" />
+          <Property Name="Mes_Ano" Type="numeric" Precision="1" Scale="0" />
+          <Property Name="Data_Dia" Type="date" />
+          <Property Name="Estacao_Ano" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Bairro_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Bairro" Type="Self.Bairro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="Idf_Cidade" />
+            </Principal>
+            <Dependent Role="Bairro">
+              <PropertyRef Name="Idf_Cidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cidade_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Idf_Estado" />
+            </Principal>
+            <Dependent Role="Cidade">
+              <PropertyRef Name="Idf_Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FATO_Imovel">
+          <End Role="Imovel" Type="Self.Imovel" Multiplicity="1" />
+          <End Role="FATO" Type="Self.FATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imovel">
+              <PropertyRef Name="Idf_Imovel" />
+            </Principal>
+            <Dependent Role="FATO">
+              <PropertyRef Name="Idf_Imovel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FATO_Regiao">
+          <End Role="Regiao" Type="Self.Regiao" Multiplicity="1" />
+          <End Role="FATO" Type="Self.FATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regiao">
+              <PropertyRef Name="Idf_Regiao" />
+            </Principal>
+            <Dependent Role="FATO">
+              <PropertyRef Name="Idf_Regiao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FATO_Tempo">
+          <End Role="Tempo" Type="Self.Tempo" Multiplicity="1" />
+          <End Role="FATO" Type="Self.FATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tempo">
+              <PropertyRef Name="Idf_Tempo" />
+            </Principal>
+            <Dependent Role="FATO">
+              <PropertyRef Name="Idf_Tempo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Regiao_Bairro">
+          <End Role="Bairro" Type="Self.Bairro" Multiplicity="1" />
+          <End Role="Regiao" Type="Self.Regiao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bairro">
+              <PropertyRef Name="Idf_Bairro" />
+            </Principal>
+            <Dependent Role="Regiao">
+              <PropertyRef Name="Idf_Bairro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrabalhoModelStoreContainer">
+          <EntitySet Name="Bairro" EntityType="Self.Bairro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FATO" EntityType="Self.FATO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imovel" EntityType="Self.Imovel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regiao" EntityType="Self.Regiao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tempo" EntityType="Self.Tempo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bairro_Cidade" Association="Self.FK_Bairro_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Bairro" EntitySet="Bairro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cidade_Estado" Association="Self.FK_Cidade_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FATO_Imovel" Association="Self.FK_FATO_Imovel">
+            <End Role="Imovel" EntitySet="Imovel" />
+            <End Role="FATO" EntitySet="FATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FATO_Regiao" Association="Self.FK_FATO_Regiao">
+            <End Role="Regiao" EntitySet="Regiao" />
+            <End Role="FATO" EntitySet="FATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FATO_Tempo" Association="Self.FK_FATO_Tempo">
+            <End Role="Tempo" EntitySet="Tempo" />
+            <End Role="FATO" EntitySet="FATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Regiao_Bairro" Association="Self.FK_Regiao_Bairro">
+            <End Role="Bairro" EntitySet="Bairro" />
+            <End Role="Regiao" EntitySet="Regiao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TrabalhoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bairro">
+          <Key>
+            <PropertyRef Name="Idf_Bairro" />
+          </Key>
+          <Property Name="Idf_Bairro" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Idf_Cidade" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Des_Bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cidade" Relationship="Self.FK_Bairro_Cidade" FromRole="Bairro" ToRole="Cidade" />
+          <NavigationProperty Name="Regiao" Relationship="Self.FK_Regiao_Bairro" FromRole="Bairro" ToRole="Regiao" />
+        </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="Idf_Cidade" />
+          </Key>
+          <Property Name="Idf_Cidade" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Idf_Estado" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Des_Cidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bairro" Relationship="Self.FK_Bairro_Cidade" FromRole="Cidade" ToRole="Bairro" />
+          <NavigationProperty Name="Estado" Relationship="Self.FK_Cidade_Estado" FromRole="Cidade" ToRole="Estado" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="Idf_Estado" />
+          </Key>
+          <Property Name="Idf_Estado" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Des_Estado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cidade" Relationship="Self.FK_Cidade_Estado" FromRole="Estado" ToRole="Cidade" />
+        </EntityType>
+        <EntityType Name="FATO">
+          <Key>
+            <PropertyRef Name="Idf_Fato" />
+          </Key>
+          <Property Name="Idf_Fato" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Idf_Regiao" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Idf_Tempo" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="Idf_Imovel" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Imovel" Relationship="Self.FK_FATO_Imovel" FromRole="FATO" ToRole="Imovel" />
+          <NavigationProperty Name="Regiao" Relationship="Self.FK_FATO_Regiao" FromRole="FATO" ToRole="Regiao" />
+          <NavigationProperty Name="Tempo" Relationship="Self.FK_FATO_Tempo" FromRole="FATO" ToRole="Tempo" />
+        </EntityType>
+        <EntityType Name="Imovel">
+          <Key>
+            <PropertyRef Name="Idf_Imovel" />
+          </Key>
+          <Property Name="Idf_Imovel" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status_" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Area" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Area_Privada" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Preco_IPTU" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Area_Condominio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Flg_Planta" Type="Boolean" />
+          <Property Name="Flg_Dependencia" Type="Boolean" />
+          <Property Name="Flg_Sacada" Type="Boolean" />
+          <Property Name="Flg_Portaria" Type="Boolean" />
+          <Property Name="Flg_Elevador" Type="Boolean" />
+          <Property Name="Churrasqueira" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Dormintorios" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Suites" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Vagas" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Banheiros" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Faixa_Valor_Venda" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Flg_Mostra_mapa" Type="Boolean" />
+          <Property Name="Faixa_Valor_Aluguel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FATO" Relationship="Self.FK_FATO_Imovel" FromRole="Imovel" ToRole="FATO" />
+        </EntityType>
+        <EntityType Name="Regiao">
+          <Key>
+            <PropertyRef Name="Idf_Regiao" />
+          </Key>
+          <Property Name="Idf_Regiao" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Idf_Bairro" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CEP" Type="Decimal" Precision="11" Scale="0" />
+          <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Complemento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Longitude" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Numero" Type="Decimal" Precision="10" Scale="0" />
+          <NavigationProperty Name="Bairro" Relationship="Self.FK_Regiao_Bairro" FromRole="Regiao" ToRole="Bairro" />
+          <NavigationProperty Name="FATO" Relationship="Self.FK_FATO_Regiao" FromRole="Regiao" ToRole="FATO" />
+        </EntityType>
+        <EntityType Name="Tempo">
+          <Key>
+            <PropertyRef Name="Idf_Tempo" />
+          </Key>
+          <Property Name="Idf_Tempo" Type="Decimal" Precision="10" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Analise_Mensal" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="Clima" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Semana_Mes" Type="Decimal" Precision="1" Scale="0" />
+          <Property Name="Flg_Feriado" Type="Boolean" />
+          <Property Name="Flg_Final_Semana" Type="Boolean" />
+          <Property Name="Mes_Ano" Type="Decimal" Precision="1" Scale="0" />
+          <Property Name="Data_Dia" Type="DateTime" Precision="0" />
+          <Property Name="Estacao_Ano" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FATO" Relationship="Self.FK_FATO_Tempo" FromRole="Tempo" ToRole="FATO" />
+        </EntityType>
+        <Association Name="FK_Bairro_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Bairro" Type="Self.Bairro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="Idf_Cidade" />
+            </Principal>
+            <Dependent Role="Bairro">
+              <PropertyRef Name="Idf_Cidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Regiao_Bairro">
+          <End Role="Bairro" Type="Self.Bairro" Multiplicity="1" />
+          <End Role="Regiao" Type="Self.Regiao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bairro">
+              <PropertyRef Name="Idf_Bairro" />
+            </Principal>
+            <Dependent Role="Regiao">
+              <PropertyRef Name="Idf_Bairro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cidade_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="Idf_Estado" />
+            </Principal>
+            <Dependent Role="Cidade">
+              <PropertyRef Name="Idf_Estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FATO_Imovel">
+          <End Role="Imovel" Type="Self.Imovel" Multiplicity="1" />
+          <End Role="FATO" Type="Self.FATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imovel">
+              <PropertyRef Name="Idf_Imovel" />
+            </Principal>
+            <Dependent Role="FATO">
+              <PropertyRef Name="Idf_Imovel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FATO_Regiao">
+          <End Role="Regiao" Type="Self.Regiao" Multiplicity="1" />
+          <End Role="FATO" Type="Self.FATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regiao">
+              <PropertyRef Name="Idf_Regiao" />
+            </Principal>
+            <Dependent Role="FATO">
+              <PropertyRef Name="Idf_Regiao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FATO_Tempo">
+          <End Role="Tempo" Type="Self.Tempo" Multiplicity="1" />
+          <End Role="FATO" Type="Self.FATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tempo">
+              <PropertyRef Name="Idf_Tempo" />
+            </Principal>
+            <Dependent Role="FATO">
+              <PropertyRef Name="Idf_Tempo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrabalhoEFEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bairro" EntityType="Self.Bairro" />
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" />
+          <EntitySet Name="FATO" EntityType="Self.FATO" />
+          <EntitySet Name="Imovel" EntityType="Self.Imovel" />
+          <EntitySet Name="Regiao" EntityType="Self.Regiao" />
+          <EntitySet Name="Tempo" EntityType="Self.Tempo" />
+          <AssociationSet Name="FK_Bairro_Cidade" Association="Self.FK_Bairro_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Bairro" EntitySet="Bairro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Regiao_Bairro" Association="Self.FK_Regiao_Bairro">
+            <End Role="Bairro" EntitySet="Bairro" />
+            <End Role="Regiao" EntitySet="Regiao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cidade_Estado" Association="Self.FK_Cidade_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Cidade" EntitySet="Cidade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FATO_Imovel" Association="Self.FK_FATO_Imovel">
+            <End Role="Imovel" EntitySet="Imovel" />
+            <End Role="FATO" EntitySet="FATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FATO_Regiao" Association="Self.FK_FATO_Regiao">
+            <End Role="Regiao" EntitySet="Regiao" />
+            <End Role="FATO" EntitySet="FATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FATO_Tempo" Association="Self.FK_FATO_Tempo">
+            <End Role="Tempo" EntitySet="Tempo" />
+            <End Role="FATO" EntitySet="FATO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TrabalhoModelStoreContainer" CdmEntityContainer="TrabalhoEFEntities">
+          <EntitySetMapping Name="Bairro">
+            <EntityTypeMapping TypeName="TrabalhoModel.Bairro">
+              <MappingFragment StoreEntitySet="Bairro">
+                <ScalarProperty Name="Idf_Bairro" ColumnName="Idf_Bairro" />
+                <ScalarProperty Name="Idf_Cidade" ColumnName="Idf_Cidade" />
+                <ScalarProperty Name="Des_Bairro" ColumnName="Des_Bairro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cidade">
+            <EntityTypeMapping TypeName="TrabalhoModel.Cidade">
+              <MappingFragment StoreEntitySet="Cidade">
+                <ScalarProperty Name="Idf_Cidade" ColumnName="Idf_Cidade" />
+                <ScalarProperty Name="Idf_Estado" ColumnName="Idf_Estado" />
+                <ScalarProperty Name="Des_Cidade" ColumnName="Des_Cidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado">
+            <EntityTypeMapping TypeName="TrabalhoModel.Estado">
+              <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="Idf_Estado" ColumnName="Idf_Estado" />
+                <ScalarProperty Name="Des_Estado" ColumnName="Des_Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FATO">
+            <EntityTypeMapping TypeName="TrabalhoModel.FATO">
+              <MappingFragment StoreEntitySet="FATO">
+                <ScalarProperty Name="Idf_Fato" ColumnName="Idf_Fato" />
+                <ScalarProperty Name="Idf_Regiao" ColumnName="Idf_Regiao" />
+                <ScalarProperty Name="Idf_Tempo" ColumnName="Idf_Tempo" />
+                <ScalarProperty Name="Idf_Imovel" ColumnName="Idf_Imovel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imovel">
+            <EntityTypeMapping TypeName="TrabalhoModel.Imovel">
+              <MappingFragment StoreEntitySet="Imovel">
+                <ScalarProperty Name="Idf_Imovel" ColumnName="Idf_Imovel" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="Status_" ColumnName="Status_" />
+                <ScalarProperty Name="Faixa_Area" ColumnName="Faixa_Area" />
+                <ScalarProperty Name="Faixa_Area_Privada" ColumnName="Faixa_Area_Privada" />
+                <ScalarProperty Name="Faixa_Preco_IPTU" ColumnName="Faixa_Preco_IPTU" />
+                <ScalarProperty Name="Faixa_Area_Condominio" ColumnName="Faixa_Area_Condominio" />
+                <ScalarProperty Name="Flg_Planta" ColumnName="Flg_Planta" />
+                <ScalarProperty Name="Flg_Dependencia" ColumnName="Flg_Dependencia" />
+                <ScalarProperty Name="Flg_Sacada" ColumnName="Flg_Sacada" />
+                <ScalarProperty Name="Flg_Portaria" ColumnName="Flg_Portaria" />
+                <ScalarProperty Name="Flg_Elevador" ColumnName="Flg_Elevador" />
+                <ScalarProperty Name="Churrasqueira" ColumnName="Churrasqueira" />
+                <ScalarProperty Name="Faixa_Dormintorios" ColumnName="Faixa_Dormintorios" />
+                <ScalarProperty Name="Faixa_Suites" ColumnName="Faixa_Suites" />
+                <ScalarProperty Name="Faixa_Vagas" ColumnName="Faixa_Vagas" />
+                <ScalarProperty Name="Faixa_Banheiros" ColumnName="Faixa_Banheiros" />
+                <ScalarProperty Name="Faixa_Valor_Venda" ColumnName="Faixa_Valor_Venda" />
+                <ScalarProperty Name="Flg_Mostra_mapa" ColumnName="Flg_Mostra_mapa" />
+                <ScalarProperty Name="Faixa_Valor_Aluguel" ColumnName="Faixa_Valor_Aluguel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regiao">
+            <EntityTypeMapping TypeName="TrabalhoModel.Regiao">
+              <MappingFragment StoreEntitySet="Regiao">
+                <ScalarProperty Name="Idf_Regiao" ColumnName="Idf_Regiao" />
+                <ScalarProperty Name="Idf_Bairro" ColumnName="Idf_Bairro" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tempo">
+            <EntityTypeMapping TypeName="TrabalhoModel.Tempo">
+              <MappingFragment StoreEntitySet="Tempo">
+                <ScalarProperty Name="Idf_Tempo" ColumnName="Idf_Tempo" />
+                <ScalarProperty Name="Analise_Mensal" ColumnName="Analise_Mensal" />
+                <ScalarProperty Name="Clima" ColumnName="Clima" />
+                <ScalarProperty Name="Semana_Mes" ColumnName="Semana_Mes" />
+                <ScalarProperty Name="Flg_Feriado" ColumnName="Flg_Feriado" />
+                <ScalarProperty Name="Flg_Final_Semana" ColumnName="Flg_Final_Semana" />
+                <ScalarProperty Name="Mes_Ano" ColumnName="Mes_Ano" />
+                <ScalarProperty Name="Data_Dia" ColumnName="Data_Dia" />
+                <ScalarProperty Name="Estacao_Ano" ColumnName="Estacao_Ano" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
